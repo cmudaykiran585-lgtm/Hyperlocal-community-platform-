@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none">
+  <defs>
+    <linearGradient id="nxG1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#101B33"/>
+      <stop offset="100%" stop-color="#172541"/>
+    </linearGradient>
+    <linearGradient id="nxG2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00C2B8"/>
+      <stop offset="100%" stop-color="#2563EB"/>
+    </linearGradient>
+    <filter id="nxShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="1.5" stdDeviation="2.5" flood-color="#00C2B8" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+  <!-- Rounded Base Squircle -->
+  <rect width="48" height="48" rx="14" fill="url(#nxG1)"/>
+  <rect x="1" y="1" width="46" height="46" rx="13" stroke="#172541" stroke-width="1.5"/>
+  
+  <!-- Stylized Geometric Nexus N Network -->
+  <g filter="url(#nxShadow)">
+    <!-- Connecting network lines -->
+    <path d="M14 34V14L24 25L34 14V34" stroke="url(#nxG2)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M14 14L34 34" stroke="#00C2B8" stroke-width="2" stroke-linecap="round" stroke-dasharray="1 4" stroke-opacity="0.7"/>
+    
+    <!-- Central Hub Pulse Ring -->
+    <circle cx="24" cy="24" r="4.5" fill="#101B33" stroke="#00C2B8" stroke-width="2"/>
+    <circle cx="24" cy="24" r="2" fill="#00C2B8"/>
+    
+    <!-- Verified Network Nodes -->
+    <circle cx="14" cy="14" r="3.5" fill="#FFFFFF" stroke="#00C2B8" stroke-width="1.5"/>
+    <circle cx="34" cy="14" r="3.5" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5"/>
+    <circle cx="14" cy="34" r="3.5" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5"/>
+    <circle cx="34" cy="34" r="3.5" fill="#FFFFFF" stroke="#00C2B8" stroke-width="1.5"/>
+  </g>
+</svg>
