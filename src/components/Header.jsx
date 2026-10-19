@@ -537,8 +537,14 @@ export default function Header() {
                         <div className="px-3 py-2 border-b border-[#E2E8F0] mb-1">
                           <div className="text-xs font-bold text-[#182338]">{currentUser.name}</div>
                           <div className="text-[11px] text-[#66748B] truncate">{currentUser.email || currentUser.phone}</div>
-                          <div className="mt-1 inline-block px-2 py-0.5 rounded-md bg-[#00C2B8]/15 text-[#00C2B8] text-[10px] font-bold">
-                            {currentUser.role === 'provider' ? 'Provider Account' : 'Customer Account'}
+                          <div className={`mt-1 inline-block px-2 py-0.5 rounded-md text-[10px] font-black uppercase tracking-wider ${
+                            currentUser.role === 'admin'
+                              ? 'bg-rose-100 text-rose-700 border border-rose-200'
+                              : currentUser.role === 'provider'
+                              ? 'bg-[#00C2B8]/15 text-[#008f88] border border-[#00C2B8]/30'
+                              : 'bg-blue-50 text-blue-700 border border-blue-200'
+                          }`}>
+                            {currentUser.role === 'admin' ? '🛡️ Admin Account' : currentUser.role === 'provider' ? '⚡ Provider Account' : '👤 User Account'}
                           </div>
                         </div>
 
@@ -560,20 +566,74 @@ export default function Header() {
                           <Link
                             to="/provider-dashboard"
                             onClick={() => setProfileDropdownOpen(false)}
-                            className="block px-3 py-2 rounded-lg text-xs font-medium text-[#182338] hover:bg-[#F7F9FC]"
+                            className="block px-3 py-2 rounded-lg text-xs font-bold text-[#008f88] bg-[#00C2B8]/10 hover:bg-[#00C2B8]/20"
                           >
-                            Provider Dashboard
+                            ⚡ Open Provider Dashboard
                           </Link>
                         )}
-                        <button
-                          onClick={() => {
-                            switchRole(currentUser.role === 'provider' ? 'customer' : 'provider');
-                            setProfileDropdownOpen(false);
-                          }}
-                          className="w-full text-left px-3 py-2 rounded-lg text-xs font-medium text-[#182338] hover:bg-[#F7F9FC]"
-                        >
-                          Switch to {currentUser.role === 'provider' ? 'Customer' : 'Provider'}
-                        </button>
+                        {currentUser.role === 'admin' && (
+                          <Link
+                            to="/admin"
+                            onClick={() => setProfileDropdownOpen(false)}
+                            className="block px-3 py-2 rounded-lg text-xs font-bold text-rose-700 bg-rose-50 hover:bg-rose-100"
+                          >
+                            🛡️ Open Admin Dashboard
+                          </Link>
+                        )}
+
+                        {/* Interactive Role Switcher */}
+                        <div className="border-t border-[#E2E8F0] my-1.5 pt-1.5 px-3">
+                          <span className="text-[10px] uppercase font-bold tracking-wider text-[#66748B] block mb-1.5">
+                            Switch Active Role
+                          </span>
+                          <div className="grid grid-cols-3 gap-1">
+                            <button
+                              type="button"
+                              onClick={() => {
+                                switchRole('user');
+                                navigate('/');
+                                setProfileDropdownOpen(false);
+                              }}
+                              className={`py-1.5 px-2 rounded-lg text-[11px] font-bold text-center transition-colors cursor-pointer ${
+                                currentUser.role === 'user'
+                                  ? 'bg-[#182338] text-white shadow-xs'
+                                  : 'bg-[#F1F5F9] text-[#475569] hover:bg-[#E2E8F0]'
+                              }`}
+                            >
+                              User
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                switchRole('provider');
+                                navigate('/provider-dashboard');
+                                setProfileDropdownOpen(false);
+                              }}
+                              className={`py-1.5 px-2 rounded-lg text-[11px] font-bold text-center transition-colors cursor-pointer ${
+                                currentUser.role === 'provider'
+                                  ? 'bg-[#00C2B8] text-[#0B132B] shadow-xs'
+                                  : 'bg-[#F1F5F9] text-[#475569] hover:bg-[#E2E8F0]'
+                              }`}
+                            >
+                              Provider
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                switchRole('admin');
+                                navigate('/admin');
+                                setProfileDropdownOpen(false);
+                              }}
+                              className={`py-1.5 px-2 rounded-lg text-[11px] font-bold text-center transition-colors cursor-pointer ${
+                                currentUser.role === 'admin'
+                                  ? 'bg-[#E11D48] text-white shadow-xs'
+                                  : 'bg-[#F1F5F9] text-[#475569] hover:bg-[#E2E8F0]'
+                              }`}
+                            >
+                              Admin
+                            </button>
+                          </div>
+                        </div>
                         <div className="border-t border-[#E2E8F0] mt-1 pt-1">
                           <button
                             onClick={() => {
